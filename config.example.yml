@@ -1,0 +1,24 @@
+tokens:
+  admin: bc43817af87af445214dc1e7c33151a039bc71c747a5059bc733aa6d1ddc581e
+  service-web: 0dc563a38439ce57b0d109bdb54b77480075548df8564b8d2dc4c93288d17cb7
+  service-web-accounts: 4b75a59f8d863dfc23ac48ca5c01a7b562d8fdbdd839b259e73dcc0c41385a0c
+  service-batch: adbf64038b841b29a2c50c0b36c76058a1364240c83f7277d6ea41a2d4b6f48a
+
+permissions:
+  "/":
+    all:
+    - admin
+  "/sessions/":
+    read:
+    - service-web
+    - service-web-accounts
+    write:
+    - service-web-accounts
+  "/graph/":
+    read:
+    - service-web
+    - service-batch
+    list:
+    - service-batch
+    write:
+    - service-batch
