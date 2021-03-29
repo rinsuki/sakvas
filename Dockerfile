@@ -6,6 +6,7 @@ RUN go mod download
 COPY *.go .
 RUN go build -o /sakvas
 
+ENV GIN_MODE release
 EXPOSE 3000
 
 WORKDIR /
