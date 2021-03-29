@@ -109,8 +109,13 @@ func main() {
 		panic(err)
 	}
 
+	redisHost, foundRedisHost := os.LookupEnv("REDIS_HOST")
+	if !foundRedisHost {
+		redisHost = "localhost:6379"
+	}
+
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     redisHost,
 		DB:       0,
 		Password: "",
 	})
