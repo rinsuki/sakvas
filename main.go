@@ -5,7 +5,9 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/go-yaml/yaml"
@@ -125,6 +127,12 @@ func main() {
 	}
 
 	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "PUT", "DELETE"},
+		AllowHeaders: []string{"Content-Type", "Authorization"},
+		MaxAge:       24 * time.Hour,
+	}))
 	router.GET("/v1/key/*key", func(c *gin.Context) {
 		path := c.Param("key")
 		if err := isAllowed(c, path, Read); err != nil {
